@@ -1,15 +1,17 @@
 {
-  "name": "vuetify-material-dashboard",
+  "name": "VRED",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "dev": "npm run serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "start": "node server.js"
   },
   "dependencies": {
     "chartist": "0.11.0",
+    "express": "^4.16.4",
     "node-sass": "^4.9.3",
     "sass-loader": "^7.1.0",
     "vue": "^2.5.17",
