@@ -73,7 +73,7 @@ app.get("/api/users", function(req, res) {
 
 app.post("/api/users", function(req, res) {
   var newUser = req.body;
-  newUser.createDate = new Date();
+  // newUser.createDate = new Date();
 
   if (!req.body.name) {
     handleError(res, "Invalid user input", "Must provide a name.", 400);
