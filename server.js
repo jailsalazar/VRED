@@ -13,7 +13,7 @@ var USER_COLLECTION = "users";
 var db;
 
 // Connect to the database before starting the application server.
-mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://vred:vred19@ds139956.mlab.com:39956/heroku_zjlrbqq9", function (err, client) {
+mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, client) {
   if (err) {
     console.log(err);
     process.exit(1);
