@@ -1,11 +1,8 @@
 // server.js
-
 var express = require("express");
 const mongodb = require('mongodb');
 var ObjectID = mongodb.ObjectID;
 var serveStatic = require('serve-static');
-// const uri = "mongodb+srv://test:test123@vred-4o1l8.mongodb.net/test?retryWrites=true";
-// const client = new MongoClient(uri, { useNewUrlParser: true });
 
 app = express();
 app.use(serveStatic(__dirname + "/dist"));
@@ -27,18 +24,10 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://vred:vred19@ds
   console.log("Database connection ready");
 
   // Initialize the app.
-  var server = app.listen(process.env.PORT || 8080, function () {
-    var port = server.address().port;
-    console.log("App now running on port", port);
+  app.listen(process.env.PORT || 3000, function(){
+    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
   });
 });
-
-// client.connect(err => {
-//   const collection = client.db("test").collection("devices");
-//   // perform actions on the collection object
-//   client.close();
-// });
-
 
 //API ROUTES
 
