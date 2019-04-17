@@ -1,9 +1,11 @@
 // server.js
 
 var express = require("express");
-var mongodb = require("mongodb");
+const mongodb = require('mongodb');
 var ObjectID = mongodb.ObjectID;
 var serveStatic = require('serve-static');
+// const uri = "mongodb+srv://test:test123@vred-4o1l8.mongodb.net/test?retryWrites=true";
+// const client = new MongoClient(uri, { useNewUrlParser: true });
 
 app = express();
 app.use(serveStatic(__dirname + "/dist"));
@@ -14,7 +16,7 @@ var USER_COLLECTION = "users";
 var db;
 
 // Connect to the database before starting the application server.
-mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/test", function (err, client) {
+mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://vred:vred19@ds139956.mlab.com:39956/heroku_zjlrbqq9", function (err, client) {
   if (err) {
     console.log(err);
     process.exit(1);
@@ -31,6 +33,13 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:2701
   });
 });
 
+// client.connect(err => {
+//   const collection = client.db("test").collection("devices");
+//   // perform actions on the collection object
+//   client.close();
+// });
+
+
 //API ROUTES
 
 // Generic error handler used by all endpoints.
@@ -43,6 +52,13 @@ function handleError(res, reason, message, code) {
  *    GET: finds all users
  *    POST: creates a new user
  */
+
+/* User schema
+  “_id”: ObjectId,
+  “name”: String,
+  “email”: String,
+ */
+
 app.get("/api/users", function(req, res) {
   db.collection(USER_COLLECTION).find({}).toArray(function(err, docs) {
     if (err) {
