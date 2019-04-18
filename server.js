@@ -4,19 +4,15 @@ var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
 var serveStatic = require('serve-static');
+var cors = require('cors')
 
 var USERS_COLLECTION = "users";
 var DATA_COLLECTION = "data";
 var EVALUATION_COLLECTION = "evaluation";
 
 var app = express();
-// app.use(bodyParser.json());
+app.options('*', cors()); // preflight OPTIONS; put before other routes
 app.use(serveStatic(__dirname + "/dist"));
-
-// var port = process.env.PORT || 5000;
-// app.listen(port);
-
-// console.log('Server started ' + port);
 
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
 var db;
