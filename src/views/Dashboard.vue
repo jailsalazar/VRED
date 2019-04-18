@@ -348,6 +348,8 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+
 export default {
   data () {
     return {
@@ -470,9 +472,17 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      "getUser"
+    ]),
+
     complete (index) {
       this.list[index] = !this.list[index]
     }
+  },
+
+  created() {
+    this.getUser();
   }
 }
 </script>

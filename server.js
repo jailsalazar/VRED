@@ -52,7 +52,7 @@ function handleError(res, reason, message, code) {
  */
 
 app.get("/api/users", function(req, res) {
-  db.collection(USER_COLLECTION).find({}).toArray(function(err, docs) {
+  db.collection(USERS_COLLECTION).find({}).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get users.");
     } else {
