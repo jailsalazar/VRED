@@ -12,8 +12,13 @@ var EVALUATION_COLLECTION = "evaluation";
 
 var app = express();
 app.options('*', cors()); // preflight OPTIONS; put before other routes
-app.use(allowCrossDomain)
-app.use(serveStatic(__dirname + "/dist"));
+app.all('*', function(req, res, next) {
+  var origin = req.get('origin'); 
+  res.header('Access-Control-Allow-Origin', origin);
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});app.use(serveStatic(__dirname + "/dist"));
 app.use(bodyParser.json());
 
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
