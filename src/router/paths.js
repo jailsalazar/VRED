@@ -5,6 +5,10 @@
  */
 export default [
   {
+    path: '/',
+    view: 'Dashboard'
+  },
+  {
     path: '/dashboard',
     view: 'Dashboard'
   },
