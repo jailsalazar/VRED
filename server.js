@@ -3,13 +3,20 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
+var serveStatic = require('serve-static');
 
 var USERS_COLLECTION = "users";
 var DATA_COLLECTION = "data";
 var EVALUATION_COLLECTION = "evaluation";
 
 var app = express();
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
+app.use(serveStatic(__dirname + "/dist"));
+
+// var port = process.env.PORT || 5000;
+// app.listen(port);
+
+// console.log('Server started ' + port);
 
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
 var db;
@@ -29,14 +36,6 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://vred:vred19@ds
   var server = app.listen(process.env.PORT || 8080, function () {
     var port = server.address().port;
     console.log("App now running on port", port);
-  });
-  if(process.env.NODE_ENV === 'production'){
-    //set static folder
-    app.use(express.static('client/build'));
-  }
-  
-  app.get('*',(req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 });
 
