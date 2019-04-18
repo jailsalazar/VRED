@@ -19,7 +19,8 @@ export default {
 
   getEvaluations: async({commit}) => {
     let res = await axios.get(API_URL + 'evaluation');
-    commit("updateEvaluations", res.data);
+    console.log(res); 
+    commit("updateEvaluations", res);
     return;
   },
 

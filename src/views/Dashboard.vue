@@ -73,18 +73,7 @@ export default {
           align: 'right'
         }
       ],
-      items: [
-        {
-          name: 'Simple Foods',
-          city: '---',
-          salary: 'Feburary 21, 2019'
-        },
-        {
-          name: 'Complex Foods',
-          city: '---',
-          salary: 'Feburary 25, 2019'
-        }
-      ],
+      items: [],
       tabs: 0,
       list: {
         0: false,
@@ -93,9 +82,15 @@ export default {
       }
     }
   },
+  computed: {
+    getEvaluationList() {
+      return this.$store.getters.getEvaluationList;
+    }
+  },
+
   methods: {
     ...mapActions([
-      "getUser"
+      "getUser", "getEvaluations"
     ]),
 
     complete (index) {
@@ -105,6 +100,9 @@ export default {
 
   created() {
     this.getUser();
+    this.getEvaluations().then(() => {
+      this.items = this.getEvaluationList;
+    });
   }
 }
 </script>

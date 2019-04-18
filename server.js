@@ -12,6 +12,7 @@ var EVALUATION_COLLECTION = "evaluation";
 
 var app = express();
 app.options('*', cors()); // preflight OPTIONS; put before other routes
+app.use(allowCrossDomain)
 app.use(serveStatic(__dirname + "/dist"));
 app.use(bodyParser.json());
 
