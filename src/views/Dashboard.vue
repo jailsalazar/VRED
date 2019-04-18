@@ -32,9 +32,9 @@
               slot-scope="{ index, item }"
             >
               <td>{{ index + 1 }}</td>
-              <td>{{ item.name }}</td>
-              <td class="text-xs-right">{{ item.salary }}</td>
-              <td class="text-xs-right">{{ item.city }}</td>
+              <td>{{ item.evaluation.complexity }} {{ item.evaluation.level }}</td>
+              <td class="text-xs-right">{{ item.createDate }}</td>
+              <td class="text-xs-right">{{ "--" }}</td>
             </template>
           </v-data-table>
         </material-card>
@@ -63,13 +63,11 @@ export default {
         {
           sortable: false,
           text: 'Date',
-          value: 'salary',
           align: 'right'
         },
         {
           sortable: false,
           text: 'Duration',
-          value: 'city',
           align: 'right'
         }
       ],
@@ -101,7 +99,7 @@ export default {
   created() {
     this.getUser();
     this.getEvaluations().then(() => {
-      this.items = this.getEvaluationList;
+      this.items = this.$store.state.evaluations;
     });
   }
 }

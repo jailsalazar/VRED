@@ -3,5 +3,5 @@
 export default {
   data: [],
   evaluations: [],
-  user: {}
+  user: []
 }

@@ -10,6 +10,6 @@ export default {
   },
 
   updateEvaluations: (state, payload) => {
-    state.evaluations = { ...payload };
+    state.evaluations = payload;
   }
 }
