@@ -33,10 +33,6 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://vred:vred19@ds
 });
 
 //API ROUTES
-app.get('/', function(req, res){
-  res.redirect('/dashboard');
-});
-
 // Generic error handler used by all endpoints.
 function handleError(res, reason, message, code) {
   console.log("ERROR: " + reason);
