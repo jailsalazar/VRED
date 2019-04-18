@@ -1,26 +1,13 @@
 // server.js
 var express = require("express");
-const mongodb = require('mongodb');
+var bodyParser = require("body-parser");
+var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
-var serveStatic = require('serve-static');
 
-app = express();
-app.use(serveStatic(__dirname + "/dist"));
+var USERS_COLLECTION = "users";
 
-// server.js
-
-// var express = require('express');
-// var serveStatic = require('serve-static');
-
-// app = express();
-// app.use(serveStatic(__dirname + "/dist"));
-
-// var port = process.env.PORT || 5000;
-// app.listen(port);
-
-// console.log('Server started ' + port);
-
-var USER_COLLECTION = "users";
+var app = express();
+app.use(bodyParser.json());
 
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
 var db;
@@ -37,8 +24,9 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://vred:vred19@ds
   console.log("Database connection ready");
 
   // Initialize the app.
-  app.listen(process.env.PORT || 3000, function(){
-    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+  var server = app.listen(process.env.PORT || 8080, function () {
+    var port = server.address().port;
+    console.log("App now running on port", port);
   });
 });
 
@@ -72,13 +60,14 @@ app.get("/api/users", function(req, res) {
 });
 
 app.post("/api/users", function(req, res) {
+  console.log(req);
   var newUser = req.body;
-  // newUser.createDate = new Date();
+  newUser.createDate = new Date();
 
   if (!req.body.name) {
     handleError(res, "Invalid user input", "Must provide a name.", 400);
   } else {
-    db.collection(USER_COLLECTION).insertOne(newUser, function(err, doc) {
+    db.collection(USERS_COLLECTION).insertOne(newUser, function(err, doc) {
       if (err) {
         handleError(res, err.message, "Failed to create new user.");
       } else {
