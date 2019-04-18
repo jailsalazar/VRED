@@ -11,11 +11,11 @@
                 <v-card-text>
                   <v-layout wrap>
                     <v-flex xs12 md6>
-                      <v-select :items="level" label="Level"/>
+                      <v-select :items="levels" v-model="level" label="Level"/>
                     </v-flex>
 
                     <v-flex xs12 md6>
-                      <v-select :items="complexity" label="Complexity"/>
+                      <v-select :items="complexitys" v-model="complexity" label="Complexity"/>
                     </v-flex>
 
                     <v-flex xs12 md12>
@@ -111,7 +111,8 @@
             <v-card-actions>
               <v-btn :disabled="step === 1" @click="step--" class="back">Back</v-btn>
               <v-spacer></v-spacer>
-              <v-btn :disabled="step === 4" color="cyan" depressed @click="step++">Next</v-btn>
+              <v-btn v-if="step === 3" color="cyan" depressed @click="sendEvaluation()">Submit</v-btn>
+              <v-btn v-else @click="step++" color="cyan" depressed>Next</v-btn>
             </v-card-actions>
           </v-form>
         </material-card>
@@ -121,9 +122,12 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
+      level: "",
+      complexity: "",
       one: "",
       two: "",
       three: "",
@@ -132,8 +136,8 @@ export default {
       six: "",
       step: 1,
       ticksLabels: ["1", "2", "3", "4", "5", "Not Sure"],
-      complexity: ["Simple", "Medium", "Complex"],
-      level: ["Self", "Pair", "Multiple"]
+      complexitys: ["Simple", "Medium", "Complex"],
+      levels: ["Self", "Pair", "Multiple"]
     };
   },
 
@@ -144,6 +148,33 @@ export default {
       } else {
         return "Please rank the following questions based on how you felt throughout your experience with the virtual reality treatment system. 1 = very uncomfortable, 2 = uncomfortable, 3 = neutral, 4 = comfortable, 5 = very comfortable.";
       }
+    }
+  },
+
+  methods: {
+    ...mapActions(["submitEvaluation"]),
+
+    sendEvaluation() {
+      let payload = {
+        evaluation: {
+          level: this.level,
+          complexity: this.complexity,
+          one: this.one,
+          two: this.two,
+          three: this.three,
+          four: this.four,
+          five: this.five,
+          six: this.six
+        }
+      };
+
+      this.submitEvaluation(payload)
+        .then(() => {
+          this.step++;
+        })
+        .catch(error => {
+          console.error(error);
+        });
     }
   }
 };
