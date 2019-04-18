@@ -5,6 +5,8 @@ var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
 
 var USERS_COLLECTION = "users";
+var DATA_COLLECTION = "data";
+var EVALUATION_COLLECTION = "evaluation";
 
 var app = express();
 app.use(bodyParser.json());
@@ -77,3 +79,68 @@ app.post("/api/users", function(req, res) {
   }
 });
 
+// DATA API ENDPOINTS
+/* Data schema
+  “heartrate”: Number,
+  “gsr”: Number,
+  “ecg”: Number,
+ */
+app.get("/api/data", function(req, res) {
+  db.collection(DATA_COLLECTION).find({}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get previous data.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
+app.post("/api/data", function(req, res) {
+  console.log(req);
+  var newData = req.body;
+  newData.createDate = new Date();
+
+  if (!req.body) {
+    handleError(res, "Invalid data input", "Must provide data.", 400);
+  } else {
+    db.collection(DATA_COLLECTION).insertOne(newData, function(err, doc) {
+      if (err) {
+        handleError(res, err.message, "Failed to create new data entry.");
+      } else {
+        res.status(201).json(doc.ops[0]);
+      }
+    });
+  }
+});
+
+// SELF EVALUATION API ENDPOINTS
+/* Evaluation schema
+  "evaluation": Object
+ */
+app.get("/api/evaluation", function(req, res) {
+  db.collection(EVALUATION_COLLECTION).find({}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get previous data.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
+app.post("/api/evaluation", function(req, res) {
+  console.log(req);
+  var newEvaluation = req.body;
+  newEvaluation.createDate = new Date();
+
+  if (!req.body) {
+    handleError(res, "Invalid data input", "Must provide data.", 400);
+  } else {
+    db.collection(EVALUATION_COLLECTION).insertOne(newEvaluation, function(err, doc) {
+      if (err) {
+        handleError(res, err.message, "Failed to create new data entry.");
+      } else {
+        res.status(201).json(doc.ops[0]);
+      }
+    });
+  }
+});
