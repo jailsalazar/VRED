@@ -12,7 +12,7 @@
         md10
       >
         <material-card
-          color="cyan"
+          color="red"
           title="Edit Profile"
           text="Complete your profile"
         >
@@ -79,7 +79,7 @@
                 >
                   <v-btn
                     class="mx-0 font-weight-light"
-                    color="cyan"
+                    color="red"
                   >
                     Update Profile
                   </v-btn>

@@ -5,6 +5,6 @@ export default {
   accent: '#82B1FF',
   error: '#f55a4e',
   info: '#00d3ee',
-  success: '#5cb860',
+  success: 'rgba(30, 30, 30, 0.46)',
   warning: '#ffa21a'
 }

@@ -24,7 +24,7 @@
           </v-list-tile-title>
         </v-list-tile>
         <v-divider/>
-        <v-list-tile
+        <!-- <v-list-tile
           v-if="responsive"
         >
           <v-text-field
@@ -32,7 +32,7 @@
             label="Search..."
             color="purple"
           />
-        </v-list-tile>
+        </v-list-tile> -->
         <v-list-tile
           v-for="(link, i) in links"
           :key="i"

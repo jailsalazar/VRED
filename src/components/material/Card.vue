@@ -23,11 +23,11 @@
         />
         <span v-else>
           <h4
-            class="title font-weight-light mb-2"
+            class="title mb-2"
             v-text="title"
           />
           <p
-            class="category font-weight-thin"
+            class="category"
             v-text="text"
           />
         </span>
@@ -114,5 +114,14 @@ export default {
         border-radius: 4px;
       }
     }
+  }
+
+  // .title {
+  //   font-weight: 500 !important;
+  // }
+
+  .category {
+    font-weight: 400 !important;
+    color: white !important;
   }
 </style>

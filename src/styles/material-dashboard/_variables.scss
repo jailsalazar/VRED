@@ -3,7 +3,7 @@
 
 //  Brand Colors
 $brand-primary:                    $purple !default;
-$brand-success:                    $green !default;
+$brand-success:                    rgba(0, 0, 0, 0.55) !default;
 $brand-danger:                     $red !default;
 $brand-warning:                    $orange !default;
 $brand-info:                       $cyan !default;
@@ -48,7 +48,7 @@ $divider-margins:                   -1px !default;
 $divider-border:                    1px solid #eee;
 
 // Sidebar Background
-$sidebar-bg:                        rgba(27, 27, 27, .74) !default;
+$sidebar-bg:                        rgba(27, 27, 27, .34) !default;
 
 // Font size
 $font-size-mini:                    9px !default;

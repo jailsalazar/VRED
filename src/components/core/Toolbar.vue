@@ -30,13 +30,13 @@
         layout
         py-2
       >
-        <v-text-field
+        <!-- <v-text-field
           v-if="responsiveInput"
           class="mr-4 mt-2 purple-input"
           label="Search..."
           hide-details
           color="purple"
-        />
+        /> -->
         <router-link
           v-ripple
           class="toolbar-items"
@@ -64,13 +64,6 @@ import {
 
 export default {
   data: () => ({
-    notifications: [
-      'Mike, John responded to your email',
-      'You have 5 new tasks',
-      'You\'re now a friend with Andrew',
-      'Another Notification',
-      'Another One'
-    ],
     title: null,
     responsive: false,
     responsiveInput: false
