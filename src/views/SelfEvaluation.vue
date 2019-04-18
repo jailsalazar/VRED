@@ -156,16 +156,14 @@ export default {
 
     sendEvaluation() {
       let payload = {
-        evaluation: {
-          level: this.level,
-          complexity: this.complexity,
-          one: this.one,
-          two: this.two,
-          three: this.three,
-          four: this.four,
-          five: this.five,
-          six: this.six
-        }
+        level: this.level,
+        complexity: this.complexity,
+        one: this.one,
+        two: this.two,
+        three: this.three,
+        four: this.four,
+        five: this.five,
+        six: this.six
       };
 
       this.submitEvaluation(payload)
