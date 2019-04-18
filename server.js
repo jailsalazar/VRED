@@ -34,7 +34,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://vred:vred19@ds
 
 //API ROUTES
 app.get('/', function(req, res){
-  res.redirect('/');
+  res.redirect('/dashboard');
 });
 
 // Generic error handler used by all endpoints.
